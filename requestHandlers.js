@@ -34,7 +34,7 @@ function upload(response, request) {
     console.log("about parsing");
     form.parse(request, function(error, fields, files) {
         console.log("parsing done");
-        fs.renameSync(file.upload.path, "./tmp/ray.png");
+        fs.renameSync(files.upload.path, "./tmp/ray.jpg");
         response.writeHead(200, {
             "Content-Type": "text/html"
         });
@@ -46,7 +46,7 @@ function upload(response, request) {
 
 function show(response, postData) {
     console.log("Req handler 'show' was called.");
-    fs.readFile("./tmp/test.jpg", "binary", function(error, file) {
+    fs.readFile("./tmp/ray.jpg", "binary", function(error, file) {
         if (error) {
             response.writeHead(500, {
                 "Content-Type": "text/plain"
