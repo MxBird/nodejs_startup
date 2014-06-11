@@ -2,8 +2,7 @@ var http = require("http");
 var url = require("url");
 
 function start(route, handle) {
-  function onRequest(request, response) {
-    var postData = "";
+  function onRequest(response, request) {
     var pathname = url.parse(request.url).pathname;
     console.log("Request for " + pathname + " received.");
 
@@ -14,7 +13,7 @@ function start(route, handle) {
     });
 
     request.addListener("end", function() {
-      route(handle, pathname, response, postData);
+      route(handle, pathname, request, response);
     });
   }
   http.createServer(onRequest).listen(3000);
